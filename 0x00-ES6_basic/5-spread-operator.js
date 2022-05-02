@@ -1,3 +1,3 @@
-export default function concatArrays (...elements) {
-  return elements;
+export default function concatArrays(array1, array2, string) {
+    return array1 + array2 + string;
 }

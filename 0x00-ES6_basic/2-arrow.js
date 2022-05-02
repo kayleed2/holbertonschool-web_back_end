@@ -1,6 +1,3 @@
-#!/usr/bin/node
-// Multiple Functions
-
 export default function getNeighborhoodsList () {
   this.sanFranciscoNeighborhoods = ['SOMA', 'Union Square'];
 

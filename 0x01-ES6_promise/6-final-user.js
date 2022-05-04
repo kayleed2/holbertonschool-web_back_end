@@ -8,5 +8,6 @@ export default function handleProfileSignUp(firstName, lastName, fileName) {
     const x = await Promise.allSettled([user, photo]).then((response) => response);
     return x;
   }
-  f1();
+  const result = f1();
+  return result;
 }

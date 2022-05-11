@@ -3,7 +3,7 @@ export default function cleanSet(set, startString) {
   let app;
   if (startString === '') return '';
   for (const el of set) {
-    if (el.includes(startString)) {
+    if (el.startsWith(startString)) {
       app = el.replace(startString, '');
       strings.push(app);
     }

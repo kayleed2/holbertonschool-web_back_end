@@ -2,7 +2,7 @@
 """execute multiple coroutines at the same time with async"""
 
 
-wait_random = __import__('0-basic_async_syntax.py').wait_random
+wait_random = __import__('0-basic_async_syntax').wait_random
 from typing import List
 import asyncio
 

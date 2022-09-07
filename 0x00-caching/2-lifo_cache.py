@@ -15,14 +15,14 @@ class LIFOCache(BaseCaching):
     def put(self, key, item):
         """ Add an item in the cache
         """
-        self.dict_list = list(self.cache_data)
         if (key and item):
             if key in self.cache_data:
                 self.cache_data.pop(key)
             self.cache_data[key] = item
 
             if ((len(self.cache_data) > super().MAX_ITEMS)):
-                el = self.dict_list[super().MAX_ITEMS - 1]
+                dict_list = list(self.cache_data)
+                el = dict_list[super().MAX_ITEMS - 1]
                 del self.cache_data[el]
                 print("DISCARD:", el[0])
 

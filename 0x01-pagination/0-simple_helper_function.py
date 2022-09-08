@@ -5,7 +5,7 @@ that takes two integer arguments
 """
 
 
-def index_range(page, page_size):
+def index_range(page: int, page_size: int) -> tuple(int):
     """return a tuple of size two
     containing a start index and an end index"""
     if page == 0 and page_size:

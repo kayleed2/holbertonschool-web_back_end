@@ -43,7 +43,7 @@ class Server:
         """Method returns dictionary with key value pairs"""
         try:
             assert index < len(self.__indexed_dataset)
-        except:
+        except AssertionError:
             raise AssertionError
         if index in self.__indexed_dataset:
             data = self.__indexed_dataset[index]

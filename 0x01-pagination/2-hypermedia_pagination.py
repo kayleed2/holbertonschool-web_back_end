@@ -60,7 +60,7 @@ class Server:
         else:
             prev = page - 1
 
-        if not page + 1:
+        if (page + 1) > total:
             nxt = None
         else:
             nxt = page + 1

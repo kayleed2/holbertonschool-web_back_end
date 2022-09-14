@@ -8,6 +8,8 @@ obfuscated
 import re
 from typing import List
 import logging
+from os import environ
+import mysql.connector
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
@@ -51,3 +53,14 @@ def get_logger() -> logging.Logger:
     handler.setFormatter(RedactingFormatter(PII_FIELDS))
     user_data.addHandler(handler)
     return user_data
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """function that returns a connector to the database"""
+    db = mysql.connector.connect(
+        host=environ.get("PERSONAL_DATA_DB_HOST"),
+        user=environ.get("PERSONAL_DATA_DB_USERNAME"),
+        password=environ.get("PERSONAL_DATA_DB_PASSWORD"),
+        database=environ.get("PERSONAL_DATA_DB_NAME")
+    )
+    return db

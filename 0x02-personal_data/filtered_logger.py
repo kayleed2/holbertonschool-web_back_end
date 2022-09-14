@@ -64,3 +64,22 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database=environ.get("PERSONAL_DATA_DB_NAME")
     )
     return db
+
+
+def main():
+    """obtain a database connection using
+    get_db and retrieve all rows in the users table"""
+    log = get_logger()
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT COUNT(*) FROM users;")
+    for row in cursor:
+        informationList = row.items()
+        item = "; ".join(f"{tuple[0]}={tuple[1]}" for el in informationList)
+        log.info(item)
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()

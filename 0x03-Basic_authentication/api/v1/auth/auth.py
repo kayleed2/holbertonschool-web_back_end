@@ -2,7 +2,6 @@
 """Module to create auth class"""
 
 
-from tkinter.messagebox import NO
 from flask import request
 from typing import List, TypeVar
 

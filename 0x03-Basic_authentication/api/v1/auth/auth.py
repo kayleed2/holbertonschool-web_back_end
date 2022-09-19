@@ -2,6 +2,7 @@
 """Module to create auth class"""
 
 
+from tkinter.messagebox import NO
 from flask import request
 from typing import List, TypeVar
 
@@ -21,8 +22,11 @@ class Auth():
 
     def authorization_header(self, request=None) -> str:
         """This will get flask request object"""
-        return request
+        if request is None or request.headers['Authorization'] is None:
+            return None
+        
+        return request.headers['Authorization']
 
     def current_user(self, request=None) -> TypeVar('User'):
         """This will get flask request object"""
-        return request
+        return None

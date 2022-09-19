@@ -11,14 +11,13 @@ class Auth():
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Returns boolean of if user is auth"""
-        if path is None:
+        if path is None or excluded_paths is None:
             return True
 
-        if excluded_paths is None or excluded_paths == "":
-            return True
-
-        if path in excluded_paths:
+        if path in excluded_paths or f"{path}/" in excluded_paths:
             return False
+
+        return True
 
     def authorization_header(self, request=None) -> str:
         """This will get flask request object"""

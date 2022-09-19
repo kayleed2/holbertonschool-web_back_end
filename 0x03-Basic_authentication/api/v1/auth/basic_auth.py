@@ -23,7 +23,7 @@ class BasicAuth(Auth):
         if string == []:
             return None
         else:
-            new = re.split("\s", authorization_header, 1)
+            new = re.split(" ", authorization_header, 1)
             if len(new) != 2:
                 return None
             return new[1]

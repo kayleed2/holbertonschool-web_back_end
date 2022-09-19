@@ -13,9 +13,6 @@ class Auth():
         """Returns boolean of if user is auth"""
         if path is None:
             return True
-        else:
-            if path not in excluded_paths:
-                return True
 
         if excluded_paths is None or excluded_paths == "[]":
             return True

@@ -12,15 +12,15 @@ def login():
     """Handles all routes for session authentication"""
     email = request.form.get('email')
     if email is None:
-        return jsonify({"error": "email missing"}, 400)
+        return jsonify({"error": "email missing"}), 400
     pwd = request.form.get('password')
     if pwd is None:
-        return jsonify({"error": "password missing"}, 400)
+        return jsonify({"error": "password missing"}), 400
 
     users = User.search({'email': email})
 
     if len(users) == 0:
-        return jsonify({"error": "no user found for this email"}, 404)
+        return jsonify({"error": "no user found for this email"}), 404
 
     for el in users:
         if not el.is_valid_password(pwd):

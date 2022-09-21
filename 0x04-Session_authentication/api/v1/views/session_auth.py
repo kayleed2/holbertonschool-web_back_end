@@ -11,9 +11,9 @@ from os import getenv
 def login():
     """Handles all routes for session authentication"""
     email = request.form.get('email')
-    pwd = request.form.get('password')
     if email is None:
         return jsonify({"error": "email missing"}, 400)
+    pwd = request.form.get('password')
     if pwd is None:
         return jsonify({"error": "password missing"}, 400)
 

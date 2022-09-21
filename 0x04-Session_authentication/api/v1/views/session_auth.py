@@ -28,8 +28,6 @@ def login():
         else:
             from api.v1.app import auth
             session_id = auth.create_session(el.id)
-            sesh = getenv('SESSION_NAME')
-            session_id[sesh] = session_id
-            # response = jsonify(el.to_json())
-            # response.set_cookie(getenv('SESSION_NAME'), session_id)
-            return session_id
+            response = jsonify(el.to_json())
+            response.set_cookie(getenv('SESSION_NAME'), session_id)
+            return response

@@ -13,7 +13,8 @@ from api.v1.auth.auth import Auth
 app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
-path_list = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+path_list = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/',
+             '/api/v1/auth_session/login/']
 
 auth = None
 auth_type = os.getenv('AUTH_TYPE', 'basic')
@@ -36,7 +37,8 @@ if auth_type == 'session_auth':
 def before_req():
     """Handles actions before request"""
     if auth and auth.require_auth(request.path, path_list):
-        if auth.authorization_header(request) is None:
+        if (auth.authorization_header(request) is None and
+           auth.session_cookie(request) is None):
             abort(401)
         if auth.current_user(request) is None:
             abort(403)

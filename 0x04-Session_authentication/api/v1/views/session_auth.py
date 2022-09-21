@@ -30,4 +30,4 @@ def login():
             session_id = auth.create_session(el.id)
             response = jsonify(el.to_json())
             response.set_cookie(getenv('SESSION_NAME'), session_id)
-            return response
+            return (response)

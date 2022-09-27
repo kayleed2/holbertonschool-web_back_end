@@ -36,12 +36,12 @@ class Auth:
         except Exception:
             return False
 
-    def _generate_uuid(self) -> str:
-        """Genertaes a new uuid"""
-        return uuid.uuid4()
-
 
 def _hash_password(password: str) -> bytes:
     """Hashes a password given as argument"""
     salt = gensalt()
     return hashpw(password.encode('utf-8'), salt)
+
+def _generate_uuid(self) -> str:
+        """Genertaes a new uuid"""
+        return uuid.uuid4()

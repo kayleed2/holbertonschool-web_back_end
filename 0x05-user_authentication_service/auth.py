@@ -46,7 +46,7 @@ class Auth:
         except Exception:
             return None
 
-    def get_user_from_session_id(self, session_id: str) -> User | None:
+    def get_user_from_session_id(self, session_id: str) -> User:
         """Gets user from session id"""
         if session_id is None:
             return None

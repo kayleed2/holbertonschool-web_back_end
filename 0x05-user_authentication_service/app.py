@@ -29,12 +29,12 @@ def users():
 def login():
     email = request.form.get('email')
     pwd = request.form.get('password')
-    
+
     if not email or not pwd:
         abort(401)
     if not (AUTH.valid_login(email=email, password=pwd)):
         abort(401)
-    
+
     session_id = AUTH.create_session(email)
     response = jsonify({"email": email, "message": "logged in"})
     response.set_cookie("session_id", session_id)

@@ -85,6 +85,7 @@ class Auth:
         except Exception:
             raise ValueError
 
+
 def _hash_password(password: str) -> bytes:
     """Hashes a password given as argument"""
     salt = gensalt()

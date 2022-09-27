@@ -3,11 +3,13 @@
 File that contains a hasing of a password method
 """
 
+from turtle import st
 from db import DB
 from base64 import encode
 from bcrypt import hashpw, gensalt, checkpw
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
+import uuid
 
 
 class Auth:
@@ -34,6 +36,10 @@ class Auth:
             return checkpw(password.encode('utf-8'), user.hashed_password)
         except Exception:
             return False
+
+    def _generate_uuid(self) -> str:
+        """Genertaes a new uuid"""
+        return uuid.uuid4()
 
 
 def _hash_password(password: str) -> bytes:

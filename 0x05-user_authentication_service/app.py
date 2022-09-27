@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 
+from re import A
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
@@ -60,6 +61,17 @@ def profile():
     if user is None:
         abort(403)
     return jsonify({"email": user.email}), 200
+
+
+@app.route('/reset_password', methods=['POST'])
+def get_reset_password_token():
+    """Implements a profile function"""
+    email = request.form.get('email')
+    if not email:
+        abort(403)
+    else:
+        token = AUTH.get_reset_password_token(email)
+        return jsonify({"email": email, "reset_token": token})
 
 
 if __name__ == "__main__":

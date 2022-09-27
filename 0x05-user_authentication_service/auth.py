@@ -42,6 +42,6 @@ def _hash_password(password: str) -> bytes:
     salt = gensalt()
     return hashpw(password.encode('utf-8'), salt)
 
-def _generate_uuid(self) -> str:
+def _generate_uuid() -> str:
         """Genertaes a new uuid"""
         return uuid.uuid4()

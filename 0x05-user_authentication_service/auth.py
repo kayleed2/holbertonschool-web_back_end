@@ -57,6 +57,17 @@ class Auth:
             return None
 
 
+    def destroy_session(self, user_id: int) -> None:
+        """Destorys user from user id"""
+        if user_id is None:
+            return None
+        try:
+            user = self._db.find_user_by(id=user_id)
+            user.session_id = None
+        except NoResultFound:
+            return None
+
+
 def _hash_password(password: str) -> bytes:
     """Hashes a password given as argument"""
     salt = gensalt()

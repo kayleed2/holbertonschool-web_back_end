@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""This module contains a basic Flask app to jumpstart the application"""
+"""This module contains a basic Flask app to jumpstart the application
+This contains each of the app routes for the web application"""
 
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth

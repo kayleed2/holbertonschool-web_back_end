@@ -3,7 +3,6 @@
 File that contains a hasing of a password method
 """
 
-from turtle import st
 from db import DB
 from base64 import encode
 from bcrypt import hashpw, gensalt, checkpw

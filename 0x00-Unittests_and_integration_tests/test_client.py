@@ -35,7 +35,7 @@ class TestGithubOrgClient(TestCase):
     def test_public_repos(self, mocker):
         """test public repos methods"""
         mocker.return_value = [{'org': 'tesla'}]
-        test = GithubOrgClient('tesls')
+        test = GithubOrgClient('tesla')
         with mock.patch('client.GithubOrgClient._public_repos_url',
                         new_callable=mock.PropertyMock) as mock:
             mock.return_value = 'tesla'

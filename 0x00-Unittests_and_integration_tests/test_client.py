@@ -34,11 +34,11 @@ class TestGithubOrgClient(TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mocker):
         """test public repos methods"""
-        mocker.return_value = [{'name': 'google'}]
-        test = GithubOrgClient('google')
+        mocker.return_value = [{'org': 'tesla'}]
+        test = GithubOrgClient('tesla')
         with mock.patch('client.GithubOrgClient._public_repos_url',
                         new_callable=mock.PropertyMock) as mock:
-            mock.return_value = 'google'
-            self.assertEqual(test.public_repos(), ['google'])
+            mock.return_value = 'tesla'
+            self.assertEqual(test.public_repos(), ['tesla'])
             mock.assert_called_once()
             mocker.assert_called_once()

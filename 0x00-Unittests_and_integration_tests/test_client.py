@@ -6,6 +6,7 @@ from client import GithubOrgClient
 import unittest
 from parameterized import parameterized, parameterized_class
 from unittest import TestCase, mock
+from mock import patch
 
 
 class TestGithubOrgClient(TestCase):
@@ -15,7 +16,7 @@ class TestGithubOrgClient(TestCase):
         ("google"),
         ("abc")
     ])
-    @mock.patch("client.get_json",
+    @patch("client.get_json",
            mock.MagicMock(return_value={'key': 'value'}))
     def test_org(self, org_name):
         "test org method"
@@ -30,7 +31,7 @@ class TestGithubOrgClient(TestCase):
             cli = GithubOrgClient("google")
             self.assertEqual(cli._public_repos_url, "url")
 
-    @mock.patch('client.get_json')
+    @patch('client.get_json')
     def test_public_repos(self, mocker):
         """test public repos methods"""
         mocker.return_value = [{'org': 'tesla'}]

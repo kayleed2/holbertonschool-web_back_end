@@ -37,7 +37,7 @@ class TestGithubOrgClient(TestCase):
         mocker.return_value = [{'org': 'tesla'}]
         test = GithubOrgClient('tesls')
         with mock.patch('client.GithubOrgClient._public_repos_url',
-                   new_callable=mock.PropertyMock) as mock:
+                        new_callable=mock.PropertyMock) as mock:
             mock.return_value = 'tesla'
             self.assertEqual(test.public_repos(), ['tesla'])
             mock.assert_called_once()

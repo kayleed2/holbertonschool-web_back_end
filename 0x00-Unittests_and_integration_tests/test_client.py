@@ -19,5 +19,13 @@ class TestGithubOrgClient(TestCase):
            mock.MagicMock(return_value={'key': 'value'}))
     def test_org(self, org_name):
         "test org method"
-        client = GithubOrgClient(org_name)
-        self.assertEqual(client.org, {'key': 'value'})
+        cli = GithubOrgClient(org_name)
+        self.assertEqual(cli.org, {'key': 'value'})
+
+    def test_public_repos_url(self):
+        """Test public_repos_url method"""
+        with mock.patch("client.get_json",
+                   new_callable=mock.PropertyMock,
+                   return_value={"repos_url": "url"}):
+            cli = GithubOrgClient("google")
+            self.assertEqual(cli._public_repos_url, "url")

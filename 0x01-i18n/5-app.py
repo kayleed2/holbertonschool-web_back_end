@@ -26,15 +26,6 @@ class Config(object):
 app.config.from_object(Config)
 
 
-@babel.localeselector
-def get_locale():
-    """Function to get locale selection"""
-    locale = request.args.get('locale')
-    if locale and locale in app.config['LANGUAGES']:
-        return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
-
-
 def get_user():
     """Get user info from request"""
     user = request.args.get('login_as')
@@ -46,8 +37,17 @@ def get_user():
 
 @app.before_request
 def before_request():
-    """Before request to stash user"""
+    """Before request to save the user into database"""
     g.user = get_user()
+
+
+@babel.localeselector
+def get_locale():
+    """Function to get locale selection"""
+    locale = request.args.get('locale')
+    if locale and locale in app.config['LANGUAGES']:
+        return locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)

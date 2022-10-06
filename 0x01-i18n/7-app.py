@@ -54,19 +54,19 @@ def get_locale():
 @babel.timezoneselector
 def get_timezone():
     """Function to get timezoe of user"""
-    timeZone = request.args.get('timezone')
-    if timeZone:
+    time = request.args.get('timezone')
+    if time:
         try:
-            timezone(timeZone)
-            return timeZone
+            timezone(time)
+            return time
         except UnknownTimeZoneError:
             pass
     if g.user:
-        userTZ = g.user.get('timezone')
-        if userTZ:
+        userTime = g.user.get('timezone')
+        if userTime:
             try:
-                timezone(userTZ)
-                return userTZ
+                timezone(userTime)
+                return userTime
             except UnknownTimeZoneError:
                 pass
     return app.config['BABEL_DEFAULT_TIMEZONE']

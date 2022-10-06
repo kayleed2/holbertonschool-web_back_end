@@ -47,7 +47,12 @@ def get_locale():
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    try:
+        user = get_user()
+        if user and user['locale'] and user['locale'] in app.config['LANGUAGES']:
+            return user['locale']
+    except Exception:
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)

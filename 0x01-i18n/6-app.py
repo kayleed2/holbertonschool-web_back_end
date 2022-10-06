@@ -47,18 +47,13 @@ def get_locale():
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
-    try:
-        user = get_user()
-        if user and user['locale'] and user['locale'] in app.config['LANGUAGES']:
-            return user['locale']
-    except Exception:
-        return request.accept_languages.best_match(app.config['LANGUAGES'])
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
     """Simple message"""
-    return render_template('6-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == "__main__":

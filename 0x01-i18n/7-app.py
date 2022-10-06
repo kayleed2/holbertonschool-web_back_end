@@ -4,6 +4,7 @@ This contains each of the app routes for the web application"""
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from pytz import timezone, UnknownTimeZoneError
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -50,10 +51,31 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
+@babel.timezoneselector
+def get_timezone():
+    """Function to get timezoe of user"""
+    timeZone = request.args.get('timezone')
+    if timeZone:
+        try:
+            timezone(timeZone)
+            return timeZone
+        except UnknownTimeZoneError:
+            pass
+    if g.user:
+        userTZ = g.user.get('timezone')
+        if userTZ:
+            try:
+                timezone(userTZ)
+                return userTZ
+            except UnknownTimeZoneError:
+                pass
+    return app.config['BABEL_DEFAULT_TIMEZONE']
+
+
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
     """Simple message"""
-    return render_template('5-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == "__main__":

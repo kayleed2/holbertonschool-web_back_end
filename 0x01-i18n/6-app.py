@@ -49,7 +49,8 @@ def get_locale():
         return locale
     try:
         user = get_user()
-        if user and user['locale'] and user['locale'] in app.config['LANGUAGES']:
+        if (user and user['locale'] and
+           user['locale'] in app.config['LANGUAGES']):
             return user['locale']
     except Exception:
         return request.accept_languages.best_match(app.config['LANGUAGES'])

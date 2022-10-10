@@ -6,6 +6,21 @@ with redis"""
 import redis
 import uuid
 from typing import Callable
+from functools import wraps
+
+
+def count_calls(method: Callable) -> Callable:
+    """Counts calls to a method"""
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args) -> int | str:
+        """Function to increment the count for specific method"""
+        key = method.__qualname__
+        self._redis.incr(key)
+        return method(self, *args)
+    
+    return wrapper
 
 
 class Cache():
@@ -16,6 +31,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: str | bytes | int | float) -> str:
         """Takes data argument and generates a random key"""
         key = str(uuid.uuid4())
@@ -24,7 +40,7 @@ class Cache():
 
     def get(self, key: str, fn: Callable = None) -> str | int:
         """Reading from Redis and recovering original type"""
-        if key:
+        if fn:
             return fn(self._redis.get(key))
         return self._redis.get(key)
 

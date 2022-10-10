@@ -51,7 +51,6 @@ def replay(method: Callable) -> None:
         print(f"{name}(*{(i).decode('utf-8')}) -> {(o).decode('utf-8')}")
 
 
-
 class Cache():
     """Class for Redis client instance"""
 

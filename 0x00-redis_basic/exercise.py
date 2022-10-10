@@ -14,7 +14,7 @@ def count_calls(method: Callable) -> Callable:
     key = method.__qualname__
 
     @wraps(method)
-    def wrapper(self, *args) -> int | str:
+    def wrapper(self, *args) -> Union[int, str]:
         """Function to increment the count for specific method"""
         key = method.__qualname__
         self._redis.incr(key)
@@ -27,7 +27,7 @@ def call_history(method: Callable) -> Callable:
     """Function to add input parameters to Redis list"""
 
     @wraps(method)
-    def wrapper(self, *args) -> int | str:
+    def wrapper(self, *args) -> Union[int, str]:
         """Stores call history into lists"""
         key = method.__qualname__
         self._redis.rpush(f"{key}:inputs", str(args))

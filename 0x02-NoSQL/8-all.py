@@ -3,6 +3,7 @@
 
 
 def list_all(mongo_collection):
+    """LIsts all documents in" collection""
     if mongo_collection.find():
         return mongo_collection.find()
     else:

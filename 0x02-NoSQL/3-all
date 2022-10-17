@@ -2,4 +2,4 @@
 
 // mongodb list all services
 
-debugger.getCollectionInfos();
+db.getCollectionInfos();

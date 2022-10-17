@@ -2,4 +2,4 @@
 
 // mongodb list all services
 
-show dbs
+show databases

@@ -5,12 +5,9 @@
 def update_topics(mongo_collection, name, topics):
     """changes all topics of a school document"""
     if mongo_collection:
-        mongo_collection.update(
-            {name: name},
-            { $set: {topics: topics}},
-            {
-                multi: true
-            }
+        mongo_collection.update_many(
+            {"name": name},
+            { '$set': {"topics": topics}},
         )
     else:
         return []

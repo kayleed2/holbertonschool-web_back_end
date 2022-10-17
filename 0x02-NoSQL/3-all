@@ -2,4 +2,4 @@
 
 // mongodb list all services
 
-db.getCollectionInfos();
+db.school.getCollectionInfos();

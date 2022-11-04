@@ -1,5 +1,6 @@
 //Connect to redis server
 
+const redis = require('redis');
 import { createClient } from 'redis';
 
 const client = createClient();
@@ -14,6 +15,7 @@ const client = createClient();
 const setNewSchool = (schoolName, value) => {
     client.set(schoolName, value, redis.print);
 };
+
 const displaySchoolValue = (schoolName) => {
     client.get(schoolName, (err, value) => {
         if (err) {
@@ -22,6 +24,7 @@ const displaySchoolValue = (schoolName) => {
         console.log(value);
     });
 };
+
 displaySchoolValue('Holberton');
 setNewSchool('HolbertonSanFrancisco', '100');
 displaySchoolValue('HolbertonSanFrancisco');
